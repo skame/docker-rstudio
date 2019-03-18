@@ -3,12 +3,11 @@ FROM rocker/tidyverse:latest
 LABEL maintainer "KAMEI Satoshi <skame@nttv6.jp>"
 
 RUN rm -rf /var/lib/apt/lists/* && apt-get update && \
-	apt-get install -y --no-install-recommends software-properties-common supervisor wget openssh-server sudo \
+	DEBIAN_FRONTEND=noninteractive && export DEBIAN_FRONTEND && apt-get install -y --no-install-recommends software-properties-common supervisor wget openssh-server sudo \
         git-core fonts-vlgothic nkf jq \
-	rsync gawk netcat curl libglu1-mesa-dev libx11-dev libv8-dev xorg && \
+	rsync gawk netcat curl libglu1-mesa-dev libx11-dev libv8-dev xorg \
 # for ldap
-	DEBIAN_FRONTEND=noninteractive && export DEBIAN_FRONTEND && \
-	apt-get install -y --no-install-recommends libpam-ldapd tcsh libnss-ldapd && \
+	libpam-ldapd tcsh libnss-ldapd && \
         apt-get clean && rm -rf /var/lib/apt/lists/* && \
 # locale
 	sed -ir 's/# ja_JP.UTF-8 UTF-8/ja_JP.UTF-8 UTF-8/' /etc/locale.gen && locale-gen && update-locale LANG=ja_JP.UTF-8
