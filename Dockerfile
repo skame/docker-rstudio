@@ -20,7 +20,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends libbz2-dev libp
         apt-get clean && rm -rf /var/lib/apt/lists/*
 # R packages
 RUN installGithub.r tidyverse/tidyverse
-RUN install2.r --error ggvis googleVis htmlwidgets lubridate mailR pipeR readxl rlist tidyr RCurl gridExtra DT xts forecast Nippon \
+RUN install2.r --error ggvis googleVis htmlwidgets lubridate mailR pipeR readxl rlist tidyr RCurl gridExtra DT xts forecast \
     caret base64enc dlm KFAS lda Matrix ca cluster fpc elastic readr foreach bit64 Rcpp doParallel rio e1071 jsonlite \
     pbapply ROCR randomForest nloptr digest xtable reshape2 knitrBootstrap magrittr knitr plyr \
     d3heatmap networkD3 ggmap sitools visNetwork rkafka gsheet RJSONIO GGally outliers leaflet formattable fasttime TSclust listless \
