@@ -1,0 +1,11 @@
+# /etc/nslcd.conf
+
+uid nslcd
+gid nslcd
+
+uri {{ var "LDAP_URI" }}
+
+base {{ var "LDAP_BASE" }}
+
+binddn {{ var "LDAP_BINDDN" }}
+bindpw {{ var "LDAP_BINDPW" }}

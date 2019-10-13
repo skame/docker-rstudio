@@ -3,12 +3,15 @@ FROM rocker/tidyverse:latest
 LABEL maintainer "KAMEI Satoshi <skame@nttv6.jp>"
 
 RUN rm -rf /var/lib/apt/lists/* && apt-get update && \
-	DEBIAN_FRONTEND=noninteractive && export DEBIAN_FRONTEND && apt-get install -y --no-install-recommends software-properties-common supervisor wget openssh-server sudo \
+	DEBIAN_FRONTEND=noninteractive && export DEBIAN_FRONTEND && \
+        apt-get install -y --no-install-recommends software-properties-common supervisor wget openssh-server sudo \
         git-core fonts-vlgothic nkf jq \
 	rsync gawk netcat curl libglu1-mesa-dev libx11-dev libv8-dev xorg \
 # for ldap
 	libpam-ldapd tcsh libnss-ldapd && \
         apt-get clean && rm -rf /var/lib/apt/lists/* && \
+        echo session required                        pam_mkhomedir.so umask=0022 skel=/etc/skel >> /etc/pam.d/common-session && \
+        echo session required                        pam_mkhomedir.so umask=0022 skel=/etc/skel >> /etc/pam.d/common-session-noninteractive && \
 # locale
 	sed -ir 's/# ja_JP.UTF-8 UTF-8/ja_JP.UTF-8 UTF-8/' /etc/locale.gen && locale-gen && update-locale LANG=ja_JP.UTF-8
 # for build
@@ -86,15 +89,23 @@ RUN apt-get update && apt-get install -y --no-install-recommends tk && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN install2.r --error irtoys
 
-####################
-## Configurations ##
-####################
+# nslcd config & nsswtich config
+RUN rm /etc/nslcd.conf
+COPY nslcd.conf-template /etc/nslcd.conf-template
+COPY nslcd-run.sh /etc/rc.nslcd-run.sh
 
 # R Studio config
 COPY rserver.conf /etc/rstudio/
 COPY Rprofile.site /etc/R/
 # for supervisord
 COPY docker.conf /etc/supervisor/conf.d/supervisord.conf
+
+# sigli (for template)
+RUN curl -Ls https://github.com/gliderlabs/sigil/releases | \
+  egrep -o '/gliderlabs/sigil/.*sigil_[0-9\.]+_Linux_x86_64.tgz' | head -1 | \
+  (curl -Lo sigil.tgz http://github.com/"$(cat)") \
+  && tar xzf sigil.tgz -C /bin \
+  && rm sigil.tgz && sigil -v
 
 EXPOSE 80
 
