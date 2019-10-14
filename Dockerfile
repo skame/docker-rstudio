@@ -102,7 +102,7 @@ COPY docker.conf /etc/supervisor/conf.d/supervisord.conf
 
 # sigli (for template)
 RUN curl -Ls https://github.com/gliderlabs/sigil/releases | \
-  egrep -o '/gliderlabs/sigil/.*sigil_[0-9\.]+_Linux_x86_64.tgz' | head -1 | \
+  grep -E -o '/gliderlabs/sigil/.*sigil_[0-9\.]+_Linux_x86_64.tgz' | head -1 | \
   (curl -Lo sigil.tgz http://github.com/"$(cat)") \
   && tar xzf sigil.tgz -C /bin \
   && rm sigil.tgz && sigil -v
