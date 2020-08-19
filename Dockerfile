@@ -26,7 +26,7 @@ RUN installGithub.r tidyverse/tidyverse
 RUN install2.r --error ggvis googleVis htmlwidgets lubridate mailR pipeR readxl rlist tidyr RCurl gridExtra DT xts forecast \
     caret base64enc dlm KFAS lda Matrix ca cluster fpc elastic readr foreach bit64 Rcpp doParallel rio e1071 jsonlite \
     pbapply ROCR randomForest nloptr digest xtable reshape2 knitrBootstrap magrittr knitr plyr \
-    d3heatmap networkD3 ggmap sitools visNetwork rkafka gsheet RJSONIO GGally outliers leaflet formattable fasttime TSclust listless \
+    networkD3 ggmap sitools visNetwork rkafka gsheet RJSONIO GGally outliers leaflet formattable fasttime TSclust \
     rgeolocate ggfortify
 RUN installGithub.r Rdatatable/data.table jimhester/knitrBootstrap
 RUN installGithub.r rstudio/rmarkdown yihui/formatR ramnathv/rCharts ramnathv/htmlwidgets bokeh/rbokeh yihui/knitr smartinsightsfromdata/rpivotTable
@@ -69,9 +69,9 @@ RUN curl 'https://drive.google.com/uc?export=download&id=0B4y35FiV1wh7cENtOXlicT
     tar -xzf mecab-0.996.tar.gz && tar -xzf mecab-ipadic-2.7.0-20070801.tar.gz && \
     (cd mecab-0.996 || exit; ./configure --with-charset="utf8"; make all; make install); ldconfig; (cd mecab-ipadic-2.7.0-20070801; ./configure --with-charset="utf-8"; make; make install) && \
     rm -rf mecab-0.996.tar.gz* && rm -rf mecab-ipadic-2.7.0-20070801*
-RUN install2.r --repos http://rmecab.jp/R --error RMeCab
-RUN curl -O http://rmecab.jp/R/src/contrib/RMeCab_1.00.tar.gz
-RUN R CMD INSTALL RMeCab_1.00.tar.gz
+RUN install2.r --repos http://rmecab.jp/R
+#RUN curl -O http://rmecab.jp/R/src/contrib/RMeCab_1.00.tar.gz
+#RUN R CMD INSTALL RMeCab_1.00.tar.gz
 # wordcloud
 RUN install2.r wordcloud
 
