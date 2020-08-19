@@ -1,4 +1,3 @@
-hooks/build
 #!/bin/bash
 set -eu
 
