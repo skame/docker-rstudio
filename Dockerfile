@@ -22,6 +22,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN apt-get update && apt-get install -y --no-install-recommends libbz2-dev libpcre3-dev openjdk-8-jdk liblzma-dev && R CMD javareconf && \
         apt-get clean && rm -rf /var/lib/apt/lists/*
 # R packages
+ARG GITHUB_PAT
+
 RUN installGithub.r tidyverse/tidyverse
 RUN install2.r --error ggvis googleVis htmlwidgets lubridate mailR pipeR readxl rlist tidyr RCurl gridExtra DT xts forecast \
     caret base64enc dlm KFAS lda Matrix ca cluster fpc elastic readr foreach bit64 Rcpp doParallel rio e1071 jsonlite \

@@ -1,0 +1,5 @@
+hooks/build
+#!/bin/bash
+set -eu
+
+docker build --build-arg GITHUB_PAT=$GITHUB_PAT -t $IMAGE_NAME .
