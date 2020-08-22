@@ -29,7 +29,7 @@ RUN install2.r --error ggvis googleVis htmlwidgets lubridate mailR pipeR readxl 
     caret base64enc dlm KFAS lda Matrix ca cluster fpc elastic readr foreach bit64 Rcpp doParallel rio e1071 jsonlite \
     pbapply ROCR randomForest nloptr digest xtable reshape2 knitrBootstrap magrittr knitr plyr \
     networkD3 ggmap sitools visNetwork rkafka gsheet RJSONIO GGally outliers leaflet formattable fasttime TSclust \
-    rgeolocate ggfortify
+    rgeolocate ggfortify ggrepel
 RUN installGithub.r Rdatatable/data.table jimhester/knitrBootstrap
 RUN installGithub.r rstudio/rmarkdown yihui/formatR ramnathv/rCharts ramnathv/htmlwidgets bokeh/rbokeh yihui/knitr smartinsightsfromdata/rpivotTable
 # plotly
